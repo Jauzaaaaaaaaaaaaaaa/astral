@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07070a">
+<script>(function(){var r=document.documentElement;r.classList.add("js");try{var n=JSON.parse(sessionStorage.getItem("astral-nav")||"null");if(n){r.classList.add("cv");r.style.setProperty("--cv",n.c||"#e2c98f")}}catch(e){}setTimeout(function(){if(!window.AX)r.classList.remove("js","cv")},5000)})()</script>
+<link rel="canonical" href="https://zodiakastral.netlify.app/">
+<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+<title>Astral — Penelusuran Zodiak & Tanya-Jawab Astrologi</title>
+<meta name="description" content="Telusuri dua belas zodiak: karakter, elemen, kecocokan, dan ramalan harian. Cari zodiakmu dari tanggal lahir dan diskusikan astrologi bersama komunitas.">
+<meta property="og:title" content="Astral — Zodiak & Tanya-Jawab">
+<meta property="og:description" content="Penelusuran zodiak dan forum tanya-jawab astrologi.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zodiakastral.netlify.app/">
+<meta property="og:site_name" content="Astral">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=b82134e3">
+<link rel="stylesheet" href="assets/css/observatorium.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Astral","url":"https://zodiakastral.netlify.app/","inLanguage":"id"},{"@type":"Organization","name":"Astral","url":"https://zodiakastral.netlify.app/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa itu rising sign?","acceptedAnswer":{"@type":"Answer","text":"Tanda yang terbit di ufuk timur saat seseorang lahir, memengaruhi kesan pertama."}}]}]}</script>
+</head>
+<body class="loading">
+<div id="curtain" aria-hidden="true"><span>ASTRAL</span></div>
+
+<div id="loader" aria-hidden="true">
+  <svg viewBox="0 0 200 240"><path pathLength="1" d="M28 60L70 38L112 82L150 46L176 118L120 150L92 206"/><circle cx="28" cy="60" r="4" style="--d:0s"/><circle cx="70" cy="38" r="2.6" style="--d:0.25s"/><circle cx="112" cy="82" r="2.6" style="--d:0.5s"/><circle cx="150" cy="46" r="4" style="--d:0.75s"/><circle cx="176" cy="118" r="2.6" style="--d:1s"/><circle cx="120" cy="150" r="2.6" style="--d:1.2s"/><circle cx="92" cy="206" r="2.6" style="--d:1.4s"/></svg>
+  <span id="pc">000</span>
+</div>
+
+<header class="top">
+  <a class="brand" href="#top">ASTRAL</a>
+  <nav class="topnav" aria-label="Utama"><a href="#semua">Zodiak</a><a href="#tanya">Tanya-Jawab</a><a href="about.html">Tentang</a></nav>
+  <span class="counter" id="cnt">01 / 12</span>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-in">
+    <p class="eyebrow" data-fx="rise" data-hold style="--d:.1s">Penelusuran Zodiak</p>
+    <h1 data-fx="mask" data-hold style="--d:.15s">Dua belas <em>bintang,</em> satu langit.</h1>
+    <p class="lead" data-fx="rise" data-hold style="--d:.75s">Gulir ke bawah untuk menjelajahi setiap zodiak: karakter, elemen, dan kecocokannya.</p>
+  </div>
+  <span class="cue" data-fx="rise" data-hold style="--d:1.1s">Gulir</span>
+</section>
+
+<div id="zwrap">
+  <div id="pin">
+    <div id="track"></div>
+    <nav id="dots" aria-label="Pilih zodiak"></nav>
+  </div>
+</div>
+
+<main>
+  <section class="signs" id="semua">
+    <h2>Semua zodiak</h2>
+    <p class="sub">Astral memuat dua belas zodiak lengkap dengan tanggal, elemen, planet penguasa, dan artikel mendalam tentang sifat serta kecocokannya. Pilih satu untuk mulai membaca.</p>
+    <div class="sgrid"><a class="scard" data-el="Api" style="--ac:#ff6a3d" href="zodiak/aries.html"><span class="sy" aria-hidden="true">♈</span><span class="sn">Aries</span><span class="sd">21 Mar – 19 Apr</span><span class="sq">Pelopor yang berani</span><span class="se">Api</span></a><a class="scard" data-el="Tanah" style="--ac:#a4f06a" href="zodiak/taurus.html"><span class="sy" aria-hidden="true">♉</span><span class="sn">Taurus</span><span class="sd">20 Apr – 20 Mei</span><span class="sq">Setia pada keindahan</span><span class="se">Tanah</span></a><a class="scard" data-el="Udara" style="--ac:#5fd8ff" href="zodiak/gemini.html"><span class="sy" aria-hidden="true">♊</span><span class="sn">Gemini</span><span class="sd">21 Mei – 20 Jun</span><span class="sq">Pikiran yang gesit</span><span class="se">Udara</span></a><a class="scard" data-el="Air" style="--ac:#a98bff" href="zodiak/cancer.html"><span class="sy" aria-hidden="true">♋</span><span class="sn">Cancer</span><span class="sd">21 Jun – 22 Jul</span><span class="sq">Hati yang melindungi</span><span class="se">Air</span></a><a class="scard" data-el="Api" style="--ac:#ff6a3d" href="zodiak/leo.html"><span class="sy" aria-hidden="true">♌</span><span class="sn">Leo</span><span class="sd">23 Jul – 22 Agu</span><span class="sq">Cahaya di setiap ruangan</span><span class="se">Api</span></a><a class="scard" data-el="Tanah" style="--ac:#a4f06a" href="zodiak/virgo.html"><span class="sy" aria-hidden="true">♍</span><span class="sn">Virgo</span><span class="sd">23 Agu – 22 Sep</span><span class="sq">Ketelitian yang tenang</span><span class="se">Tanah</span></a><a class="scard" data-el="Udara" style="--ac:#5fd8ff" href="zodiak/libra.html"><span class="sy" aria-hidden="true">♎</span><span class="sn">Libra</span><span class="sd">23 Sep – 22 Okt</span><span class="sq">Keseimbangan yang dicari</span><span class="se">Udara</span></a><a class="scard" data-el="Air" style="--ac:#a98bff" href="zodiak/scorpio.html"><span class="sy" aria-hidden="true">♏</span><span class="sn">Scorpio</span><span class="sd">23 Okt – 21 Nov</span><span class="sq">Kedalaman yang misterius</span><span class="se">Air</span></a><a class="scard" data-el="Api" style="--ac:#ff6a3d" href="zodiak/sagittarius.html"><span class="sy" aria-hidden="true">♐</span><span class="sn">Sagittarius</span><span class="sd">22 Nov – 21 Des</span><span class="sq">Pencari makna</span><span class="se">Api</span></a><a class="scard" data-el="Tanah" style="--ac:#a4f06a" href="zodiak/capricorn.html"><span class="sy" aria-hidden="true">♑</span><span class="sn">Capricorn</span><span class="sd">22 Des – 19 Jan</span><span class="sq">Pendakian yang sabar</span><span class="se">Tanah</span></a><a class="scard" data-el="Udara" style="--ac:#5fd8ff" href="zodiak/aquarius.html"><span class="sy" aria-hidden="true">♒</span><span class="sn">Aquarius</span><span class="sd">20 Jan – 18 Feb</span><span class="sq">Visi dari masa depan</span><span class="se">Udara</span></a><a class="scard" data-el="Air" style="--ac:#a98bff" href="zodiak/pisces.html"><span class="sy" aria-hidden="true">♓</span><span class="sn">Pisces</span><span class="sd">19 Feb – 20 Mar</span><span class="sq">Samudra imajinasi</span><span class="se">Air</span></a></div>
+  </section>
+
+  <section class="finder" id="cari">
+    <h2>Temukan<br>zodiakmu</h2>
+    <div>
+      <form id="finder" onsubmit="return false">
+        <input id="q" placeholder="Nama zodiak, mis. Leo" aria-label="Nama zodiak">
+        <input id="dob" type="date" aria-label="Tanggal lahir">
+        <button type="submit">Tampilkan</button>
+      </form>
+      <p id="msg" aria-live="polite"></p>
+    </div>
+  </section>
+
+  
+
+  <section class="qa" id="tanya">
+    <div>
+      <h2>Tanya-Jawab</h2>
+      <form id="askf" onsubmit="return false">
+        <input id="qt" placeholder="Tulis pertanyaanmu…" aria-label="Pertanyaan">
+        <button type="submit">Kirim</button>
+      </form>
+      <div id="chips"></div>
+      <div id="qlist"></div>
+    </div>
+    
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div><a class="brand" href="index.html">ASTRAL</a><p>Penelusuran zodiak dan tanya-jawab astrologi berbahasa Indonesia. Konten untuk hiburan.</p></div>
+    <div><h5>Zodiak</h5><nav class="cols" aria-label="Zodiak"><a href="zodiak/aries.html">Aries</a><a href="zodiak/taurus.html">Taurus</a><a href="zodiak/gemini.html">Gemini</a><a href="zodiak/cancer.html">Cancer</a><a href="zodiak/leo.html">Leo</a><a href="zodiak/virgo.html">Virgo</a><a href="zodiak/libra.html">Libra</a><a href="zodiak/scorpio.html">Scorpio</a><a href="zodiak/sagittarius.html">Sagittarius</a><a href="zodiak/capricorn.html">Capricorn</a><a href="zodiak/aquarius.html">Aquarius</a><a href="zodiak/pisces.html">Pisces</a></nav></div>
+    <div><h5>Informasi</h5><nav aria-label="Informasi"><a href="about.html">Tentang Kami</a><a href="editorial.html">Kebijakan Editorial</a><a href="contact.html">Kontak</a><a href="privacy.html">Kebijakan Privasi</a><a href="terms.html">Syarat Layanan</a></nav></div>
+  </div>
+  <div class="foot-bot">© 2026 Astral · Konten untuk hiburan, bukan nasihat medis, hukum, atau keuangan.</div>
+</footer>
+
+<script src="assets/js/zodiac-data.js?v=4f1a3897"></script>
+<script src="assets/js/knowledge.js?v=770b9b01"></script><script src="assets/js/lifestyle.js?v=add213e5"></script><script src="assets/js/qa-bank.js?v=ecfb0eac"></script><script src="assets/js/bot.js?v=b6961e99"></script><script src="assets/js/fx.js?v=8c02d78e"></script><script src="assets/js/app.js?v=28e0d51a"></script>
+<script src="assets/js/observatorium.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+/* ZODIAK: lapisan observatorium. Peta langit, instrumen, dan bacaan koordinat. */
+:root { --obs-line: rgba(226, 201, 143, .17); --obs-mono: "Space Mono", ui-monospace, Consolas, monospace; }
+
+html { background: radial-gradient(120% 90% at 70% -10%, #15142b 0, #0a0a16 46%, #05050a 100%) fixed; }
+
+/* Bima Sakti */
+#obs-milky { position: fixed; inset: -30%; z-index: -2; pointer-events: none; transform: rotate(-24deg);
+  background:
+    radial-gradient(ellipse 58% 9% at 50% 50%, rgba(226, 201, 143, .1), transparent 70%),
+    radial-gradient(ellipse 40% 5% at 40% 49%, rgba(164, 150, 255, .12), transparent 72%),
+    radial-gradient(ellipse 30% 4% at 62% 52%, rgba(95, 216, 255, .08), transparent 75%);
+  filter: blur(6px);
+}
+
+/* Bola langit */
+#obs-chart { position: fixed; left: 50%; top: 50%; z-index: -1; width: max(135vmax, 1100px); height: max(135vmax, 1100px); margin: calc(max(135vmax, 1100px) / -2) 0 0 calc(max(135vmax, 1100px) / -2); pointer-events: none; color: #e2c98f; opacity: .3; will-change: transform; }
+#obs-chart circle, #obs-chart path, #obs-chart line { fill: none; stroke: currentColor; stroke-width: .6; vector-effect: non-scaling-stroke; }
+#obs-chart .obs-major { stroke-width: 1; }
+#obs-chart text { fill: currentColor; font: 9px var(--obs-mono); letter-spacing: .12em; }
+
+/* Bacaan instrumen */
+#obs-hud { position: fixed; left: clamp(14px, 2.4vw, 34px); bottom: clamp(12px, 2.4vh, 26px); z-index: 40; display: grid; gap: 3px; font: 400 10.5px/1.4 var(--obs-mono); letter-spacing: .1em; text-transform: uppercase; color: #cdb987; pointer-events: none; text-shadow: 0 0 10px rgba(0, 0, 0, .9); }
+#obs-hud b { font-weight: 400; color: #f6f3ea; }
+#obs-moon { display: inline-block; width: 11px; height: 11px; margin-right: 6px; vertical-align: -1px; border-radius: 50%; }
+@media (max-width: 900px) { #obs-hud { display: none; } }
+
+/* Label bergaya pelat instrumen */
+.eyebrow, .counter, .topnav a, #pc { font-family: var(--obs-mono) !important; }
+.brand { letter-spacing: .42em; }
+.hero h1 { letter-spacing: -.015em; text-shadow: 0 0 60px rgba(226, 201, 143, .22); }
+
+/* Tanda sudut pada panel, seperti bingkai bidik teleskop */
+main section > article, .card, .faq details, details { position: relative; }
+.obs-frame::before, .obs-frame::after { content: ""; position: absolute; width: 14px; height: 14px; border: 1px solid var(--gold); pointer-events: none; opacity: .75; }
+.obs-frame::before { left: -1px; top: -1px; border-right: 0; border-bottom: 0; }
+.obs-frame::after { right: -1px; bottom: -1px; border-left: 0; border-top: 0; }
+
+/* Layar pembuka: rasi bintang tergambar */
+#loader { background: radial-gradient(70% 70% at 50% 45%, #15142b, #05050a); }
+#loader svg { width: min(44vw, 240px); }
+#loader circle { fill: #f6f3ea; opacity: 0; transform-box: fill-box; transform-origin: center; animation: obs-star .5s var(--d, 0s) cubic-bezier(.2, 1.6, .4, 1) forwards; filter: drop-shadow(0 0 7px #e2c98f); }
+#loader path { stroke-width: 1.4 !important; }
+@keyframes obs-star { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) { #obs-chart { will-change: auto; } }
+@media print { #obs-chart, #obs-hud, #obs-milky { display: none !important; } }
+
+/* Menu halaman artikel tidak boleh meluber di ponsel */
+@media (max-width: 600px) {
+  nav { flex-wrap: wrap; max-width: 100%; }
+  .art-glow { max-width: 100%; right: 0; }
+  body { overflow-x: clip; }
+}
