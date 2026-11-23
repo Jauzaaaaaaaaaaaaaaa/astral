@@ -19,17 +19,19 @@ Situs statis (HTML/CSS/JS). Tanya-jawab punya dua lapis:
 - Vercel: impor repository atau folder statis.
 
 ## Struktur
-- `index.html` — halaman utama
-- `assets/css/main.css` — gaya
+- `index.html` — beranda: langit 3D (Three.js) yang berubah dari roda zodiak, ke 12 rasi, lalu galaksi saat digulir
+- `assets/css/main.css` — gaya semua halaman. Palet: Kehampaan #060814, Rigel #a9c8ff, Nebula #7c5cff, Capella #f2d7a0
 - `assets/js/zodiac-data.js` — 12 zodiak dan bentuk rasi bintang
-- `assets/js/knowledge.js` — basis pengetahuan (kelebihan, kekurangan, cinta, karier, FAQ, sumber)
+- `assets/js/zodiak-lengkap.js` — ensiklopedia: modalitas, polaritas, rumah, tubuh, tarot, keberuntungan, mitologi, data rasi (IAU), tokoh, fakta sepele, dan bacaan dasar
+- `assets/js/knowledge.js` — kelebihan, kekurangan, cinta, karier, kecocokan, sumber
 - `assets/js/lifestyle.js` — makanan, liburan, fashion, uang, gaya kerja, dan "zodiak paling ..."
 - `assets/js/bot.js` — pencari jawaban lokal
+- `assets/js/fx.js` — teks acak, reveal saat gulir, smooth scroll (Lenis), tirai antarhalaman, kursor, langit 2D artikel
+- `assets/js/app.js` — pemuat, peta gulir ke langit 3D, HUD, berkas lengkap, kecocokan, pencari, fakta, tanya-jawab
+- `assets/js/langit3d.js` — adegan WebGL (Three.js 0.160 dari jsDelivr); kalau WebGL gagal, situs tetap jalan dengan latar CSS
 - `api/ask.js` — endpoint AI (Vercel Serverless Function)
-- `assets/js/fx.js` — pustaka bentuk transisi, tirai antarhalaman, reveal saat scroll, kursor, hero (dipakai semua halaman)
-- `assets/js/app.js` — loader, cerita zodiak (transisi per zodiak), pencarian, tanya-jawab
 - `site.config.js` — domain, email, ID AdSense (satu-satunya file yang Anda ubah)
-- `tools/build-site.js` — membuat ulang artikel, halaman informasi, ads.txt, robots.txt, sitemap.xml
+- `tools/build-site.js` — membuat ulang beranda, artikel, halaman informasi, ads.txt, robots.txt, sitemap.xml
 - `templates/index.src.html` — sumber beranda (hasil build menjadi `index.html`)
 - `zodiak/*.html`, `about.html`, `contact.html`, `privacy.html`, `terms.html`, `editorial.html`, `404.html` — hasil build, jangan diedit langsung
 

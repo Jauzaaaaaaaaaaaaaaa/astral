@@ -3,101 +3,338 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#07070a">
-<script>(function(){var r=document.documentElement;r.classList.add("js");try{var n=JSON.parse(sessionStorage.getItem("astral-nav")||"null");if(n){r.classList.add("cv");r.style.setProperty("--cv",n.c||"#e2c98f")}}catch(e){}setTimeout(function(){if(!window.AX)r.classList.remove("js","cv")},5000)})()</script>
+<meta name="theme-color" content="#060814">
+<script>(function(r){r.classList.add("js");try{if(sessionStorage.getItem("astral-cv"))r.classList.add("cv")}catch(e){}})(document.documentElement)</script>
 <link rel="canonical" href="https://zodiakastral.netlify.app/">
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-<title>Astral — Penelusuran Zodiak & Tanya-Jawab Astrologi</title>
-<meta name="description" content="Telusuri dua belas zodiak: karakter, elemen, kecocokan, dan ramalan harian. Cari zodiakmu dari tanggal lahir dan diskusikan astrologi bersama komunitas.">
-<meta property="og:title" content="Astral — Zodiak & Tanya-Jawab">
-<meta property="og:description" content="Penelusuran zodiak dan forum tanya-jawab astrologi.">
+<title>Astral — Ensiklopedia 12 Zodiak, Rasi Bintang & Tanya-Jawab</title>
+<meta name="description" content="Semua tentang 12 zodiak dalam satu langit: sifat, elemen, mitologi, rasi bintang, keberuntungan, tokoh terkenal, fakta sepele, kalkulator kecocokan, dan tanya-jawab astrologi.">
+<meta property="og:title" content="Astral — Ensiklopedia 12 Zodiak">
+<meta property="og:description" content="Jelajahi dua belas zodiak, dari mitologi sampai fakta paling sepele.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zodiakastral.netlify.app/">
 <meta property="og:site_name" content="Astral">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css?v=b82134e3">
-<link rel="stylesheet" href="assets/css/observatorium.css">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css?v=491a156b">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Astral","url":"https://zodiakastral.netlify.app/","inLanguage":"id"},{"@type":"Organization","name":"Astral","url":"https://zodiakastral.netlify.app/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa itu rising sign?","acceptedAnswer":{"@type":"Answer","text":"Tanda yang terbit di ufuk timur saat seseorang lahir, memengaruhi kesan pertama."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Astral","url":"https://zodiakastral.netlify.app/","inLanguage":"id"},{"@type":"Organization","name":"Astral","url":"https://zodiakastral.netlify.app/"},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa itu rising sign?","acceptedAnswer":{"@type":"Answer","text":"Tanda yang terbit di ufuk timur saat seseorang lahir. Membentuk kesan pertama dan berganti kira-kira tiap dua jam."}},{"@type":"Question","name":"Apakah Ophiuchus zodiak ke-13?","acceptedAnswer":{"@type":"Answer","text":"Matahari memang melewati rasi Ophiuchus, tetapi astrologi tetap memakai 12 tanda yang dipilih bangsa Babilonia."}}]}]}</script>
 </head>
-<body class="loading">
-<div id="curtain" aria-hidden="true"><span>ASTRAL</span></div>
+<body class="home is-loading">
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
 
 <div id="loader" aria-hidden="true">
-  <svg viewBox="0 0 200 240"><path pathLength="1" d="M28 60L70 38L112 82L150 46L176 118L120 150L92 206"/><circle cx="28" cy="60" r="4" style="--d:0s"/><circle cx="70" cy="38" r="2.6" style="--d:0.25s"/><circle cx="112" cy="82" r="2.6" style="--d:0.5s"/><circle cx="150" cy="46" r="4" style="--d:0.75s"/><circle cx="176" cy="118" r="2.6" style="--d:1s"/><circle cx="120" cy="150" r="2.6" style="--d:1.2s"/><circle cx="92" cy="206" r="2.6" style="--d:1.4s"/></svg>
-  <span id="pc">000</span>
+  <div class="ld-ring"><span style="--i:0">♈︎</span><span style="--i:1">♉︎</span><span style="--i:2">♊︎</span><span style="--i:3">♋︎</span><span style="--i:4">♌︎</span><span style="--i:5">♍︎</span><span style="--i:6">♎︎</span><span style="--i:7">♏︎</span><span style="--i:8">♐︎</span><span style="--i:9">♑︎</span><span style="--i:10">♒︎</span><span style="--i:11">♓︎</span></div>
+  <p class="ld-word">ASTRAL</p>
+  <div class="ld-meta mono"><span>Menyelaraskan langit</span><span id="ldp">000</span></div>
+  <div class="ld-bar"><i id="ldb"></i></div>
 </div>
+<div id="curtain" aria-hidden="true"><span class="mono">ASTRAL</span></div>
 
-<header class="top">
-  <a class="brand" href="#top">ASTRAL</a>
-  <nav class="topnav" aria-label="Utama"><a href="#semua">Zodiak</a><a href="#tanya">Tanya-Jawab</a><a href="about.html">Tentang</a></nav>
-  <span class="counter" id="cnt">01 / 12</span>
+<header class="hud-top">
+  <a class="brand" href="#top" data-scr>ASTRAL</a>
+  <nav class="topnav mono" aria-label="Utama">
+    <a href="#perjalanan" data-scr>Zodiak</a><a href="#buku" data-scr>Buku Langit</a><a href="#kecocokan" data-scr>Kecocokan</a><a href="#sepele" data-scr>Fakta</a><a href="#tanya" data-scr>Tanya</a>
+  </nav>
+  <span class="clock mono" id="clock" aria-hidden="true">00:00:00</span>
 </header>
 
-<section class="hero" id="top">
-  <div class="hero-in">
-    <p class="eyebrow" data-fx="rise" data-hold style="--d:.1s">Penelusuran Zodiak</p>
-    <h1 data-fx="mask" data-hold style="--d:.15s">Dua belas <em>bintang,</em> satu langit.</h1>
-    <p class="lead" data-fx="rise" data-hold style="--d:.75s">Gulir ke bawah untuk menjelajahi setiap zodiak: karakter, elemen, dan kecocokannya.</p>
-  </div>
-  <span class="cue" data-fx="rise" data-hold style="--d:1.1s">Gulir</span>
-</section>
+<aside class="hud-side mono" aria-hidden="true">
+  <span id="hudSec">00 / 12</span>
+  <div class="rail"><i id="rail"></i></div>
+  <span id="hudCoord">RA 00h 00m · DEK +00°</span>
+</aside>
 
-<div id="zwrap">
-  <div id="pin">
-    <div id="track"></div>
-    <nav id="dots" aria-label="Pilih zodiak"></nav>
-  </div>
-</div>
+<nav id="signnav" class="mono" aria-label="Lompat ke zodiak"><a href="#z-aries" data-jump="0" title="Aries"><span aria-hidden="true">♈︎</span><span class="sr">Aries</span></a><a href="#z-taurus" data-jump="1" title="Taurus"><span aria-hidden="true">♉︎</span><span class="sr">Taurus</span></a><a href="#z-gemini" data-jump="2" title="Gemini"><span aria-hidden="true">♊︎</span><span class="sr">Gemini</span></a><a href="#z-cancer" data-jump="3" title="Cancer"><span aria-hidden="true">♋︎</span><span class="sr">Cancer</span></a><a href="#z-leo" data-jump="4" title="Leo"><span aria-hidden="true">♌︎</span><span class="sr">Leo</span></a><a href="#z-virgo" data-jump="5" title="Virgo"><span aria-hidden="true">♍︎</span><span class="sr">Virgo</span></a><a href="#z-libra" data-jump="6" title="Libra"><span aria-hidden="true">♎︎</span><span class="sr">Libra</span></a><a href="#z-scorpio" data-jump="7" title="Scorpio"><span aria-hidden="true">♏︎</span><span class="sr">Scorpio</span></a><a href="#z-sagittarius" data-jump="8" title="Sagittarius"><span aria-hidden="true">♐︎</span><span class="sr">Sagittarius</span></a><a href="#z-capricorn" data-jump="9" title="Capricorn"><span aria-hidden="true">♑︎</span><span class="sr">Capricorn</span></a><a href="#z-aquarius" data-jump="10" title="Aquarius"><span aria-hidden="true">♒︎</span><span class="sr">Aquarius</span></a><a href="#z-pisces" data-jump="11" title="Pisces"><span aria-hidden="true">♓︎</span><span class="sr">Pisces</span></a></nav>
 
 <main>
-  <section class="signs" id="semua">
-    <h2>Semua zodiak</h2>
-    <p class="sub">Astral memuat dua belas zodiak lengkap dengan tanggal, elemen, planet penguasa, dan artikel mendalam tentang sifat serta kecocokannya. Pilih satu untuk mulai membaca.</p>
-    <div class="sgrid"><a class="scard" data-el="Api" style="--ac:#ff6a3d" href="zodiak/aries.html"><span class="sy" aria-hidden="true">♈</span><span class="sn">Aries</span><span class="sd">21 Mar – 19 Apr</span><span class="sq">Pelopor yang berani</span><span class="se">Api</span></a><a class="scard" data-el="Tanah" style="--ac:#a4f06a" href="zodiak/taurus.html"><span class="sy" aria-hidden="true">♉</span><span class="sn">Taurus</span><span class="sd">20 Apr – 20 Mei</span><span class="sq">Setia pada keindahan</span><span class="se">Tanah</span></a><a class="scard" data-el="Udara" style="--ac:#5fd8ff" href="zodiak/gemini.html"><span class="sy" aria-hidden="true">♊</span><span class="sn">Gemini</span><span class="sd">21 Mei – 20 Jun</span><span class="sq">Pikiran yang gesit</span><span class="se">Udara</span></a><a class="scard" data-el="Air" style="--ac:#a98bff" href="zodiak/cancer.html"><span class="sy" aria-hidden="true">♋</span><span class="sn">Cancer</span><span class="sd">21 Jun – 22 Jul</span><span class="sq">Hati yang melindungi</span><span class="se">Air</span></a><a class="scard" data-el="Api" style="--ac:#ff6a3d" href="zodiak/leo.html"><span class="sy" aria-hidden="true">♌</span><span class="sn">Leo</span><span class="sd">23 Jul – 22 Agu</span><span class="sq">Cahaya di setiap ruangan</span><span class="se">Api</span></a><a class="scard" data-el="Tanah" style="--ac:#a4f06a" href="zodiak/virgo.html"><span class="sy" aria-hidden="true">♍</span><span class="sn">Virgo</span><span class="sd">23 Agu – 22 Sep</span><span class="sq">Ketelitian yang tenang</span><span class="se">Tanah</span></a><a class="scard" data-el="Udara" style="--ac:#5fd8ff" href="zodiak/libra.html"><span class="sy" aria-hidden="true">♎</span><span class="sn">Libra</span><span class="sd">23 Sep – 22 Okt</span><span class="sq">Keseimbangan yang dicari</span><span class="se">Udara</span></a><a class="scard" data-el="Air" style="--ac:#a98bff" href="zodiak/scorpio.html"><span class="sy" aria-hidden="true">♏</span><span class="sn">Scorpio</span><span class="sd">23 Okt – 21 Nov</span><span class="sq">Kedalaman yang misterius</span><span class="se">Air</span></a><a class="scard" data-el="Api" style="--ac:#ff6a3d" href="zodiak/sagittarius.html"><span class="sy" aria-hidden="true">♐</span><span class="sn">Sagittarius</span><span class="sd">22 Nov – 21 Des</span><span class="sq">Pencari makna</span><span class="se">Api</span></a><a class="scard" data-el="Tanah" style="--ac:#a4f06a" href="zodiak/capricorn.html"><span class="sy" aria-hidden="true">♑</span><span class="sn">Capricorn</span><span class="sd">22 Des – 19 Jan</span><span class="sq">Pendakian yang sabar</span><span class="se">Tanah</span></a><a class="scard" data-el="Udara" style="--ac:#5fd8ff" href="zodiak/aquarius.html"><span class="sy" aria-hidden="true">♒</span><span class="sn">Aquarius</span><span class="sd">20 Jan – 18 Feb</span><span class="sq">Visi dari masa depan</span><span class="se">Udara</span></a><a class="scard" data-el="Air" style="--ac:#a98bff" href="zodiak/pisces.html"><span class="sy" aria-hidden="true">♓</span><span class="sn">Pisces</span><span class="sd">19 Feb – 20 Mar</span><span class="sq">Samudra imajinasi</span><span class="se">Air</span></a></div>
+  <section class="hero" id="top">
+    <p class="kicker mono" data-rv>[ Ensiklopedia zodiak · 12 tanda · 4 elemen ]</p>
+    <h1 class="h-hero" aria-label="Dua belas bintang, satu langit.">
+      <span class="ln" aria-hidden="true"><span data-split>Dua belas</span></span>
+      <span class="ln" aria-hidden="true"><em data-split>bintang,</em></span>
+      <span class="ln" aria-hidden="true"><span data-split>satu langit.</span></span>
+    </h1>
+    <p class="hero-lead" data-rv style="--d:.5s">Semua tentang zodiak, dari mitologi dan rasi bintangnya sampai fakta yang paling sepele. Gulir untuk menembus langit.</p>
+    <div class="hero-foot mono" data-rv style="--d:.7s"><span>Gulir</span><i class="cue"></i><span>Lintang 6°12′ LS · Bujur 106°49′ BT</span></div>
   </section>
 
-  <section class="finder" id="cari">
-    <h2>Temukan<br>zodiakmu</h2>
-    <div>
-      <form id="finder" onsubmit="return false">
-        <input id="q" placeholder="Nama zodiak, mis. Leo" aria-label="Nama zodiak">
-        <input id="dob" type="date" aria-label="Tanggal lahir">
-        <button type="submit">Tampilkan</button>
-      </form>
-      <p id="msg" aria-live="polite"></p>
+  <section id="perjalanan" aria-label="Dua belas zodiak">
+    <article class="step" id="z-aries" data-i="0" style="--ac:#f2d7a0">
+      <div class="card">
+        <p class="mono idx"><b>01</b> / 12 <span>·</span> Api <span>·</span> Kardinal</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♈︎</span><h2 class="zname" data-split>Aries</h2></div>
+        <p class="mono zmeta" data-scrin>21 Maret – 19 April · Mars</p>
+        <p class="zq"><em>Pelopor yang berani</em></p>
+        <p class="zd">Aries adalah tanda pertama dalam zodiak, lahir dari semangat untuk memulai sesuatu. Mereka bergerak cepat, jujur, dan tidak takut menghadapi tantangan.</p>
+        <ul class="ztags"><li>Berani</li><li>Energik</li><li>Spontan</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Libra</dd></div><div><dt class="mono">Batu</dt><dd>Berlian</dd></div><div><dt class="mono">Tarot</dt><dd>The Emperor</dd></div><div><dt class="mono">Tubuh</dt><dd>Kepala</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="0" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/aries.html" data-scr>Artikel Aries →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-taurus" data-i="1" style="--ac:#dfe6f5">
+      <div class="card">
+        <p class="mono idx"><b>02</b> / 12 <span>·</span> Tanah <span>·</span> Tetap</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♉︎</span><h2 class="zname" data-split>Taurus</h2></div>
+        <p class="mono zmeta" data-scrin>20 April – 20 Mei · Venus</p>
+        <p class="zq"><em>Setia pada keindahan</em></p>
+        <p class="zd">Taurus menghargai kenyamanan, keteguhan, dan hal-hal yang bisa dinikmati pancaindra. Mereka sabar membangun sesuatu dan sangat loyal pada orang yang dipercaya.</p>
+        <ul class="ztags"><li>Setia</li><li>Sabar</li><li>Menikmati hidup</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Scorpio</dd></div><div><dt class="mono">Batu</dt><dd>Zamrud</dd></div><div><dt class="mono">Tarot</dt><dd>The Hierophant</dd></div><div><dt class="mono">Tubuh</dt><dd>Leher</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="1" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/taurus.html" data-scr>Artikel Taurus →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-gemini" data-i="2" style="--ac:#a9c8ff">
+      <div class="card">
+        <p class="mono idx"><b>03</b> / 12 <span>·</span> Udara <span>·</span> Mutable</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♊︎</span><h2 class="zname" data-split>Gemini</h2></div>
+        <p class="mono zmeta" data-scrin>21 Mei – 20 Juni · Merkurius</p>
+        <p class="zq"><em>Pikiran yang gesit</em></p>
+        <p class="zd">Gemini identik dengan rasa ingin tahu dan kemampuan berkomunikasi. Mereka mudah beradaptasi dan selalu punya banyak cerita serta ide untuk dibagikan.</p>
+        <ul class="ztags"><li>Cerdas</li><li>Komunikatif</li><li>Adaptif</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Sagittarius</dd></div><div><dt class="mono">Batu</dt><dd>Akik</dd></div><div><dt class="mono">Tarot</dt><dd>The Lovers</dd></div><div><dt class="mono">Tubuh</dt><dd>Lengan</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="2" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/gemini.html" data-scr>Artikel Gemini →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-cancer" data-i="3" style="--ac:#a993ff">
+      <div class="card">
+        <p class="mono idx"><b>04</b> / 12 <span>·</span> Air <span>·</span> Kardinal</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♋︎</span><h2 class="zname" data-split>Cancer</h2></div>
+        <p class="mono zmeta" data-scrin>21 Juni – 22 Juli · Bulan</p>
+        <p class="zq"><em>Hati yang melindungi</em></p>
+        <p class="zd">Cancer hidup dari perasaan dan kenangan. Mereka penyayang dan protektif terhadap orang-orang terdekat, serta membangun rumah sebagai tempat paling aman.</p>
+        <ul class="ztags"><li>Penyayang</li><li>Protektif</li><li>Peka</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Capricorn</dd></div><div><dt class="mono">Batu</dt><dd>Mutiara</dd></div><div><dt class="mono">Tarot</dt><dd>The Chariot</dd></div><div><dt class="mono">Tubuh</dt><dd>Dada</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="3" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/cancer.html" data-scr>Artikel Cancer →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-leo" data-i="4" style="--ac:#f2d7a0">
+      <div class="card">
+        <p class="mono idx"><b>05</b> / 12 <span>·</span> Api <span>·</span> Tetap</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♌︎</span><h2 class="zname" data-split>Leo</h2></div>
+        <p class="mono zmeta" data-scrin>23 Juli – 22 Agustus · Matahari</p>
+        <p class="zq"><em>Cahaya di setiap ruangan</em></p>
+        <p class="zd">Leo membawa kehangatan dan kepercayaan diri. Mereka suka memberi inspirasi, murah hati, dan ingin dihargai atas ketulusan serta kreativitasnya.</p>
+        <ul class="ztags"><li>Percaya diri</li><li>Hangat</li><li>Dermawan</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Aquarius</dd></div><div><dt class="mono">Batu</dt><dd>Rubi</dd></div><div><dt class="mono">Tarot</dt><dd>Strength</dd></div><div><dt class="mono">Tubuh</dt><dd>Jantung</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="4" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/leo.html" data-scr>Artikel Leo →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-virgo" data-i="5" style="--ac:#dfe6f5">
+      <div class="card">
+        <p class="mono idx"><b>06</b> / 12 <span>·</span> Tanah <span>·</span> Mutable</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♍︎</span><h2 class="zname" data-split>Virgo</h2></div>
+        <p class="mono zmeta" data-scrin>23 Agustus – 22 September · Merkurius</p>
+        <p class="zq"><em>Ketelitian yang tenang</em></p>
+        <p class="zd">Virgo memperhatikan detail dan selalu ingin memperbaiki sesuatu. Mereka analitis, rendah hati, dan sering menjadi orang yang paling bisa diandalkan.</p>
+        <ul class="ztags"><li>Teliti</li><li>Analitis</li><li>Rendah hati</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Pisces</dd></div><div><dt class="mono">Batu</dt><dd>Safir</dd></div><div><dt class="mono">Tarot</dt><dd>The Hermit</dd></div><div><dt class="mono">Tubuh</dt><dd>Sistem pencernaan</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="5" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/virgo.html" data-scr>Artikel Virgo →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-libra" data-i="6" style="--ac:#a9c8ff">
+      <div class="card">
+        <p class="mono idx"><b>07</b> / 12 <span>·</span> Udara <span>·</span> Kardinal</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♎︎</span><h2 class="zname" data-split>Libra</h2></div>
+        <p class="mono zmeta" data-scrin>23 September – 22 Oktober · Venus</p>
+        <p class="zq"><em>Keseimbangan yang dicari</em></p>
+        <p class="zd">Libra selalu mencari harmoni dalam hubungan dan keputusan. Mereka diplomatis, adil, dan punya selera estetika yang kuat.</p>
+        <ul class="ztags"><li>Adil</li><li>Diplomatis</li><li>Estetis</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Aries</dd></div><div><dt class="mono">Batu</dt><dd>Opal</dd></div><div><dt class="mono">Tarot</dt><dd>Justice</dd></div><div><dt class="mono">Tubuh</dt><dd>Ginjal</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="6" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/libra.html" data-scr>Artikel Libra →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-scorpio" data-i="7" style="--ac:#a993ff">
+      <div class="card">
+        <p class="mono idx"><b>08</b> / 12 <span>·</span> Air <span>·</span> Tetap</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♏︎</span><h2 class="zname" data-split>Scorpio</h2></div>
+        <p class="mono zmeta" data-scrin>23 Oktober – 21 November · Pluto</p>
+        <p class="zq"><em>Kedalaman yang misterius</em></p>
+        <p class="zd">Scorpio menyelami hal-hal yang tersembunyi. Mereka intens, setia, dan membangun kepercayaan secara perlahan, tetapi sekali percaya mereka sangat loyal.</p>
+        <ul class="ztags"><li>Intens</li><li>Misterius</li><li>Loyal</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Taurus</dd></div><div><dt class="mono">Batu</dt><dd>Topaz</dd></div><div><dt class="mono">Tarot</dt><dd>Death</dd></div><div><dt class="mono">Tubuh</dt><dd>Organ reproduksi</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="7" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/scorpio.html" data-scr>Artikel Scorpio →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-sagittarius" data-i="8" style="--ac:#f2d7a0">
+      <div class="card">
+        <p class="mono idx"><b>09</b> / 12 <span>·</span> Api <span>·</span> Mutable</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♐︎</span><h2 class="zname" data-split>Sagittarius</h2></div>
+        <p class="mono zmeta" data-scrin>22 November – 21 Desember · Jupiter</p>
+        <p class="zq"><em>Pencari makna</em></p>
+        <p class="zd">Sagittarius mencintai kebebasan, petualangan, dan pencarian makna. Mereka jujur, optimis, dan sering membuka cakrawala baru bagi orang di sekitarnya.</p>
+        <ul class="ztags"><li>Optimis</li><li>Petualang</li><li>Jujur</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Gemini</dd></div><div><dt class="mono">Batu</dt><dd>Pirus</dd></div><div><dt class="mono">Tarot</dt><dd>Temperance</dd></div><div><dt class="mono">Tubuh</dt><dd>Pinggul</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="8" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/sagittarius.html" data-scr>Artikel Sagittarius →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-capricorn" data-i="9" style="--ac:#dfe6f5">
+      <div class="card">
+        <p class="mono idx"><b>10</b> / 12 <span>·</span> Tanah <span>·</span> Kardinal</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♑︎</span><h2 class="zname" data-split>Capricorn</h2></div>
+        <p class="mono zmeta" data-scrin>22 Desember – 19 Januari · Saturnus</p>
+        <p class="zq"><em>Pendakian yang sabar</em></p>
+        <p class="zd">Capricorn bekerja dengan disiplin dan tujuan jangka panjang. Mereka bertanggung jawab, ambisius, dan menikmati hasil dari kerja keras yang konsisten.</p>
+        <ul class="ztags"><li>Disiplin</li><li>Ambisius</li><li>Bertanggung jawab</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Cancer</dd></div><div><dt class="mono">Batu</dt><dd>Garnet</dd></div><div><dt class="mono">Tarot</dt><dd>The Devil</dd></div><div><dt class="mono">Tubuh</dt><dd>Lutut</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="9" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/capricorn.html" data-scr>Artikel Capricorn →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-aquarius" data-i="10" style="--ac:#a9c8ff">
+      <div class="card">
+        <p class="mono idx"><b>11</b> / 12 <span>·</span> Udara <span>·</span> Tetap</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♒︎</span><h2 class="zname" data-split>Aquarius</h2></div>
+        <p class="mono zmeta" data-scrin>20 Januari – 18 Februari · Uranus</p>
+        <p class="zq"><em>Visi dari masa depan</em></p>
+        <p class="zd">Aquarius memikirkan perubahan dan kemanusiaan secara luas. Mereka mandiri, unik, dan sering datang dengan gagasan yang melampaui zamannya.</p>
+        <ul class="ztags"><li>Visioner</li><li>Mandiri</li><li>Unik</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Leo</dd></div><div><dt class="mono">Batu</dt><dd>Kecubung</dd></div><div><dt class="mono">Tarot</dt><dd>The Star</dd></div><div><dt class="mono">Tubuh</dt><dd>Pergelangan kaki</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="10" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/aquarius.html" data-scr>Artikel Aquarius →</a></div>
+      </div>
+    </article>
+    <article class="step" id="z-pisces" data-i="11" style="--ac:#a993ff">
+      <div class="card">
+        <p class="mono idx"><b>12</b> / 12 <span>·</span> Air <span>·</span> Mutable</p>
+        <div class="zhead"><span class="glyph" aria-hidden="true">♓︎</span><h2 class="zname" data-split>Pisces</h2></div>
+        <p class="mono zmeta" data-scrin>19 Februari – 20 Maret · Neptunus</p>
+        <p class="zq"><em>Samudra imajinasi</em></p>
+        <p class="zd">Pisces hidup dengan intuisi dan empati yang dalam. Mereka imajinatif, lembut, dan sering menjadi tempat orang lain menemukan ketenangan.</p>
+        <ul class="ztags"><li>Intuitif</li><li>Empatik</li><li>Imajinatif</li></ul>
+        <dl class="zmini">
+          <div><dt class="mono">Seberang</dt><dd>Virgo</dd></div><div><dt class="mono">Batu</dt><dd>Aquamarine</dd></div><div><dt class="mono">Tarot</dt><dd>The Moon</dd></div><div><dt class="mono">Tubuh</dt><dd>Telapak kaki</dd></div>
+        </dl>
+        <div class="zact"><button class="btn" type="button" data-open="11" data-scr>Buka berkas lengkap</button><a class="lnk mono" href="zodiak/pisces.html" data-scr>Artikel Pisces →</a></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="sec" id="buku">
+    <div class="sec-head">
+      <p class="kicker mono" data-rv>[ 02 — Buku langit ]</p>
+      <h2 class="h-sec" data-split>Dasar-dasar zodiak</h2>
+      <p class="sec-lead" data-rv>Dari mana zodiak berasal, mengapa tanggalnya bergeser, dan apa bedanya tanda dengan rasi bintang.</p>
     </div>
+    <ol class="entries"><li data-rv style="--d:0s"><span class="mono">01</span><h3>Asal kata</h3><p>Zodiak berasal dari bahasa Yunani zōidiakos kyklos, 'lingkaran hewan-hewan kecil', karena sebagian besar tandanya berupa hewan.</p></li><li data-rv style="--d:0.08s"><span class="mono">02</span><h3>Ekliptika</h3><p>Jalur yang dilalui Matahari di langit selama setahun. Bulan dan planet bergerak di dekatnya, dan zodiak adalah sabuk selebar ±8° di kiri-kanan jalur itu.</p></li><li data-rv style="--d:0.16s"><span class="mono">03</span><h3>Dua belas bagian</h3><p>Bangsa Babilonia membagi ekliptika menjadi 12 bagian sama besar, masing-masing 30°, sekitar abad ke-5 SM. Satu bagian kira-kira sama dengan satu bulan.</p></li><li data-rv style="--d:0.24s"><span class="mono">04</span><h3>Dari Babilonia ke Barat</h3><p>Sistem ini diwarisi Yunani. Ptolemeus menuliskannya dalam Tetrabiblos (abad ke-2 M), buku yang menjadi pegangan astrologi Barat selama berabad-abad.</p></li><li data-rv style="--d:0s"><span class="mono">05</span><h3>Tropis vs sidereal</h3><p>Astrologi Barat memakai zodiak tropis yang terikat musim: 0° Aries selalu jatuh pada ekuinoks Maret. Astrologi Weda (India) memakai zodiak sidereal yang terikat bintang; selisih keduanya kini sekitar 24°.</p></li><li data-rv style="--d:0.08s"><span class="mono">06</span><h3>Presesi</h3><p>Sumbu Bumi bergoyang seperti gasing, satu putaran sekitar 25.800 tahun. Akibatnya tanda zodiak dan rasi bintangnya kini sudah bergeser hampir satu bagian.</p></li><li data-rv style="--d:0.16s"><span class="mono">07</span><h3>Ophiuchus, rasi ke-13</h3><p>Matahari juga melewati rasi Ophiuchus (29 Nov – 17 Des). NASA menegaskan tahun 2016 bahwa ini bukan zodiak baru; bangsa Babilonia memang memilih 12 agar pas dengan 12 bulan.</p></li><li data-rv style="--d:0.24s"><span class="mono">08</span><h3>Tanggal yang bergeser</h3><p>Tanggal tiap zodiak bisa berbeda satu hari antarsumber, karena saat Matahari memasuki tiap tanda sedikit berubah dari tahun ke tahun.</p></li></ol>
+    <div class="matrix-wrap" data-rv>
+      <h3 class="mono sub-h">Elemen × modalitas: tiap zodiak punya satu kombinasi unik</h3>
+      <table class="matrix">
+        <thead><tr><th></th><th scope="col" class="mono">Kardinal</th><th scope="col" class="mono">Tetap</th><th scope="col" class="mono">Mutable</th></tr></thead>
+        <tbody><tr style="--ac:#f2d7a0"><th scope="row"><b>Api</b><small>Semangat, keberanian, dan gerak. Cocok dengan udara yang menghidupkan api.</small></th><td><a href="#z-aries" data-jump="0"><span aria-hidden="true">♈︎</span>Aries</a></td><td><a href="#z-leo" data-jump="4"><span aria-hidden="true">♌︎</span>Leo</a></td><td><a href="#z-sagittarius" data-jump="8"><span aria-hidden="true">♐︎</span>Sagittarius</a></td></tr><tr style="--ac:#dfe6f5"><th scope="row"><b>Tanah</b><small>Praktis, stabil, dan sabar membangun. Cocok dengan air yang menyuburkan.</small></th><td><a href="#z-capricorn" data-jump="9"><span aria-hidden="true">♑︎</span>Capricorn</a></td><td><a href="#z-taurus" data-jump="1"><span aria-hidden="true">♉︎</span>Taurus</a></td><td><a href="#z-virgo" data-jump="5"><span aria-hidden="true">♍︎</span>Virgo</a></td></tr><tr style="--ac:#a9c8ff"><th scope="row"><b>Udara</b><small>Ide, komunikasi, dan kebebasan. Cocok dengan api yang mereka kobarkan.</small></th><td><a href="#z-libra" data-jump="6"><span aria-hidden="true">♎︎</span>Libra</a></td><td><a href="#z-aquarius" data-jump="10"><span aria-hidden="true">♒︎</span>Aquarius</a></td><td><a href="#z-gemini" data-jump="2"><span aria-hidden="true">♊︎</span>Gemini</a></td></tr><tr style="--ac:#a993ff"><th scope="row"><b>Air</b><small>Perasaan, intuisi, dan kedalaman. Cocok dengan tanah yang menampungnya.</small></th><td><a href="#z-cancer" data-jump="3"><span aria-hidden="true">♋︎</span>Cancer</a></td><td><a href="#z-scorpio" data-jump="7"><span aria-hidden="true">♏︎</span>Scorpio</a></td><td><a href="#z-pisces" data-jump="11"><span aria-hidden="true">♓︎</span>Pisces</a></td></tr></tbody>
+      </table>
+      <ul class="mods"><li><b class="mono">Kardinal</b> Pemula. Tandanya membuka tiap musim, jadi pandai memulai dan memimpin.</li><li><b class="mono">Tetap</b> Penjaga. Berada di tengah musim, jadi teguh, konsisten, dan sulit digoyahkan.</li><li><b class="mono">Mutable</b> Penyesuai. Menutup tiap musim, jadi luwes dan mudah beradaptasi.</li></ul>
+    </div>
+    <div class="peta"><div class="pcard" data-rv style="--d:0s"><h3>Sun sign</h3><p>Zodiak yang biasa kita sebut: posisi Matahari saat lahir. Menggambarkan jati diri dan ego.</p></div><div class="pcard" data-rv style="--d:0.08s"><h3>Moon sign</h3><p>Posisi Bulan saat lahir. Menggambarkan emosi dan kebutuhan batin. Bulan berpindah tanda tiap ±2,5 hari.</p></div><div class="pcard" data-rv style="--d:0.16s"><h3>Rising sign</h3><p>Tanda yang terbit di ufuk timur saat lahir, disebut juga ascendant. Membentuk kesan pertama; berganti tiap ±2 jam, jadi butuh jam lahir.</p></div><div class="pcard" data-rv style="--d:0s"><h3>Dua belas rumah</h3><p>Peta kelahiran dibagi 12 rumah, masing-masing satu bidang hidup: diri, harta, komunikasi, keluarga, cinta, kerja, pasangan, transformasi, perjalanan, karier, pertemanan, dan batin.</p></div><div class="pcard" data-rv style="--d:0.08s"><h3>Cusp</h3><p>Lahir di dekat pergantian tanda disebut cusp. Secara astrologi kamu tetap satu tanda, ditentukan dari jam dan lokasi lahir.</p></div><div class="pcard" data-rv style="--d:0.16s"><h3>Aspek</h3><p>Sudut antartanda menentukan kecocokan: trine (120°) paling harmonis, sextile (60°) mendukung, square (90°) penuh gesekan, oposisi (180°) saling melengkapi.</p></div></div>
+    <p class="sains" data-rv><span class="mono">Catatan jujur</span>Astrologi bukan sains. Studi Shawn Carlson di jurnal Nature (1985) menemukan astrolog tidak bisa mencocokkan peta kelahiran dengan kepribadian lebih baik daripada tebakan. Deskripsi zodiak terasa pas karena efek Barnum: kalimat umum terasa sangat pribadi. Nikmati sebagai hiburan dan bahan obrolan, bukan dasar keputusan penting.</p>
   </section>
 
   
 
-  <section class="qa" id="tanya">
-    <div>
-      <h2>Tanya-Jawab</h2>
-      <form id="askf" onsubmit="return false">
-        <input id="qt" placeholder="Tulis pertanyaanmu…" aria-label="Pertanyaan">
-        <button type="submit">Kirim</button>
-      </form>
-      <div id="chips"></div>
-      <div id="qlist"></div>
+  <section class="sec" id="kecocokan">
+    <div class="sec-head">
+      <p class="kicker mono" data-rv>[ 03 — Kalkulator ]</p>
+      <h2 class="h-sec" data-split>Kecocokan dua tanda</h2>
+      <p class="sec-lead" data-rv>Pilih dua zodiak. Skornya dihitung dari sudut keduanya di roda zodiak, elemen, dan tradisi kecocokan populer.</p>
     </div>
+    <div class="compat" data-rv>
+      <div class="cp-row"><span class="mono">Tanda A</span><div class="cp-pick" id="cpA" role="radiogroup" aria-label="Zodiak pertama"></div></div>
+      <div class="cp-row"><span class="mono">Tanda B</span><div class="cp-pick" id="cpB" role="radiogroup" aria-label="Zodiak kedua"></div></div>
+      <div class="cp-out" aria-live="polite">
+        <div class="cp-dial">
+          <svg class="cp-ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52"/><circle id="cpArc" cx="60" cy="60" r="52" pathLength="100"/></svg>
+          <div class="cp-num"><b id="cpScore">--</b><span class="mono">/ 100</span></div>
+        </div>
+        <div class="cp-txt"><p class="mono" id="cpAspect">Pilih dua tanda</p><h3 id="cpPair">—</h3><p id="cpDesc"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="cari">
+    <div class="sec-head">
+      <p class="kicker mono" data-rv>[ 04 — Pencari ]</p>
+      <h2 class="h-sec" data-split>Temukan zodiakmu</h2>
+    </div>
+    <form id="finder" class="finder" data-rv>
+      <label><span class="mono">Tanggal lahir</span><input id="dob" type="date" required></label>
+      <button class="btn" type="submit" data-scr>Baca langitku</button>
+    </form>
+    <div class="find-out" id="findOut" aria-live="polite"></div>
+  </section>
+
+  <section class="sec" id="sepele">
+    <div class="sec-head">
+      <p class="kicker mono" data-rv>[ 05 — Fakta sepele ]</p>
+      <h2 class="h-sec" data-split>Hal kecil dari langit</h2>
+    </div>
+    <div class="trivia" data-rv>
+      <p class="mono tv-n" id="tvN">Fakta 01</p>
+      <p class="tv-t" id="tvT" aria-live="polite"></p>
+      <div class="tv-act"><button class="btn ghost" id="tvPrev" type="button" aria-label="Fakta sebelumnya">←</button><button class="btn" id="tvRnd" type="button" data-scr>Fakta acak</button><button class="btn ghost" id="tvNext" type="button" aria-label="Fakta berikutnya">→</button></div>
+    </div>
+  </section>
+
+  <section class="sec qa" id="tanya">
+    <div class="sec-head">
+      <p class="kicker mono" data-rv>[ 06 — Tanya-jawab ]</p>
+      <h2 class="h-sec" data-split>Tanya apa saja</h2>
+      <p class="sec-lead" data-rv>Dijawab dari basis pengetahuan Astral. Contoh: "kelebihan Pisces", "cocok Leo dengan Scorpio", "zodiak paling setia".</p>
+    </div>
+    <form id="askf" class="askf" data-rv>
+      <input id="qt" placeholder="Tulis pertanyaanmu…" aria-label="Pertanyaan" autocomplete="off">
+      <button class="btn" type="submit">Kirim</button>
+    </form>
+    <div id="chips" class="chips"></div>
+    <div id="qlist"></div>
     
   </section>
 </main>
 
 <footer class="foot">
   <div class="foot-top">
-    <div><a class="brand" href="index.html">ASTRAL</a><p>Penelusuran zodiak dan tanya-jawab astrologi berbahasa Indonesia. Konten untuk hiburan.</p></div>
+    <div><a class="brand big" href="index.html">ASTRAL</a><p>Ensiklopedia zodiak dan tanya-jawab astrologi berbahasa Indonesia. Konten untuk hiburan.</p></div>
     <div><h5>Zodiak</h5><nav class="cols" aria-label="Zodiak"><a href="zodiak/aries.html">Aries</a><a href="zodiak/taurus.html">Taurus</a><a href="zodiak/gemini.html">Gemini</a><a href="zodiak/cancer.html">Cancer</a><a href="zodiak/leo.html">Leo</a><a href="zodiak/virgo.html">Virgo</a><a href="zodiak/libra.html">Libra</a><a href="zodiak/scorpio.html">Scorpio</a><a href="zodiak/sagittarius.html">Sagittarius</a><a href="zodiak/capricorn.html">Capricorn</a><a href="zodiak/aquarius.html">Aquarius</a><a href="zodiak/pisces.html">Pisces</a></nav></div>
     <div><h5>Informasi</h5><nav aria-label="Informasi"><a href="about.html">Tentang Kami</a><a href="editorial.html">Kebijakan Editorial</a><a href="contact.html">Kontak</a><a href="privacy.html">Kebijakan Privasi</a><a href="terms.html">Syarat Layanan</a></nav></div>
   </div>
-  <div class="foot-bot">© 2026 Astral · Konten untuk hiburan, bukan nasihat medis, hukum, atau keuangan.</div>
+  <div class="foot-bot mono"><span>© 2026 Astral</span><span>Konten untuk hiburan, bukan nasihat medis, hukum, atau keuangan.</span></div>
 </footer>
 
+<div id="dossier" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="dsName" hidden>
+  <div class="ds-in" id="dsIn"></div>
+</div>
+
 <script src="assets/js/zodiac-data.js?v=4f1a3897"></script>
-<script src="assets/js/knowledge.js?v=770b9b01"></script><script src="assets/js/lifestyle.js?v=add213e5"></script><script src="assets/js/qa-bank.js?v=ecfb0eac"></script><script src="assets/js/bot.js?v=b6961e99"></script><script src="assets/js/fx.js?v=8c02d78e"></script><script src="assets/js/app.js?v=28e0d51a"></script>
-<script src="assets/js/observatorium.js"></script>
+<script src="assets/js/knowledge.js?v=770b9b01"></script>
+<script src="assets/js/lifestyle.js?v=add213e5"></script>
+<script src="assets/js/zodiak-lengkap.js?v=1a62741a"></script>
+<script src="assets/js/qa-bank.js?v=ecfb0eac"></script>
+<script src="assets/js/bot.js?v=b6961e99"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/js/fx.js?v=9b5ed90b"></script>
+<script src="assets/js/app.js?v=971447cd"></script>
+<script type="module" src="assets/js/langit3d.js?v=958920fd"></script>
+
 </body>
 </html>
